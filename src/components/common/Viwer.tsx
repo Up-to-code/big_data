@@ -89,13 +89,14 @@ const Show: React.FC = () => {
       },
       { threshold: 0.1 }
     );
-    if (loaderRef.current) {
-      observer.observe(loaderRef.current);
+    const currentLoaderRef = loaderRef.current; // Copy the ref value to a variable
+    if (currentLoaderRef) {
+      observer.observe(currentLoaderRef);
     }
 
     return () => {
-      if (loaderRef.current) {
-        observer.unobserve(loaderRef.current);
+      if (currentLoaderRef) {
+        observer.unobserve(currentLoaderRef);
       }
     };
   }, [visibleCount, searchTerm, locationTerm]);
