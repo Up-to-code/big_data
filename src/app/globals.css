@@ -1,6 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+ 
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+
+/* Apply the Cairo font to all elements */
+* {
+  font-family: "Cairo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400; /* Default font weight, you can adjust between 200 and 1000 */
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+}
+
+/* To apply specific weights, use classes or elements */
+.light {
+  font-weight: 200; /* Example for light weight */
+}
+
+.regular {
+  font-weight: 400; /* Example for regular weight */
+}
+
+.bold {
+  font-weight: 700; /* Example for bold weight */
+}
+
+/* You can add other weights for different elements as needed */
+.extra-bold {
+  font-weight: 900;
+}
 
 :root {
   --background: #ffffff;
@@ -14,14 +43,75 @@
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
+ 
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+    --card: #f9fafb;
+    --card-foreground: #1f2937;
+    --popover: #f9fafb;
+    --popover-foreground: #1f2937;
+    --primary: #3b82f6;
+    --primary-foreground: #ffffff;
+    --secondary: #6b7280;
+    --secondary-foreground: #ffffff;
+    --muted: #6b7280;
+    --muted-foreground: #1f2937;
+    --accent: #6b7280;
+    --accent-foreground: #ffffff;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --border: #6b7280;
+    --input: #f9fafb;
+    --ring: #3b82f6;
+    --chart-1: #3b82f6;
+    --chart-2: #f9fafb;
+    --chart-3: #ef4444;
+    --chart-4: #6b7280;
+    --chart-5: #3b82f6;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --card: #1f2937;
+    --card-foreground: #f9fafb;
+    --popover: #1f2937;
+    --popover-foreground: #f9fafb;
+    --primary: #3b82f6;
+    --primary-foreground: #ffffff;
+    --secondary: #6b7280;
+    --secondary-foreground: #ffffff;
+    --muted: #6b7280;
+    --muted-foreground: #f9fafb;
+    --accent: #6b7280;
+    --accent-foreground: #ffffff;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --border: #6b7280;
+    --input: #1f2937;
+    --ring: #3b82f6;
+    --chart-1: #3b82f6;
+    --chart-2: #f9fafb;
+    --chart-3: #ef4444;
+    --chart-4: #6b7280;
+    --chart-5: #3b82f6;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
