@@ -26,8 +26,10 @@ const Item: React.FC<ItemProps> = ({ item }) => {
         {item.title}
       </div>
       <div className="text-md mb-2">{item.Location}</div>
-      <div className="text-md mb-2">{item.space}</div>
-      <div className="text-md mb-2">{item.rooms} عرف</div>
+      {
+        item.space === item.rooms ? null : <div className="text-md mb-2">{item.space}</div>
+      }
+       <div className="text-md mb-2">{item.rooms} عرف</div>
       <div className="text-md mb-4">{item.price}</div>
  
         <div className="text-md mb-2 flex items-center">
@@ -37,14 +39,16 @@ const Item: React.FC<ItemProps> = ({ item }) => {
           />{" "}
           {item.Location}
         </div>
-        <div className="text-md mb-2 flex items-center">
-          <Smartphone
-            className="ml-1"
-            style={{ fontSize: 16 }}
-          />{" "}
-          {item.tell}
-        </div>
-  
+        {
+          item.tell &&
+          <div className="text-md mb-2 flex items-center">
+            <Smartphone
+              className="ml-1"
+              style={{ fontSize: 16 }}
+            />{" "}
+            {item.tell}
+          </div>
+        }
       <button
         onClick={() => window.open(brands[0].type === "bayut" ? `https://www.bayut.sa/${item.url}` : item.url, "_blank")}
         className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors duration-300 w-full mt-4"

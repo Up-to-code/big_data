@@ -26,7 +26,7 @@ const SearchInput: React.FC = () => {
         type="text"
         onChange={handleSearch}
         placeholder="Search by title or location..."
-        className="w-full p-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:border-blue-600 transition-all duration-300 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200"
+        className="w-full p-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:border-blue-600 transition-all duration-300 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-300 dark:border-r-zinc-700"
       />
     </div>
   );
