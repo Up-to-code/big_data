@@ -1,9 +1,11 @@
 import Home_page from "@/components/page/Home_page";
 import Show from "../components/common/Viwer";
+import News from "@/components/common/News";
 
 function Home() {
   return (
     <>
+      <News />
       <Home_page />
       <Show />
     </>
