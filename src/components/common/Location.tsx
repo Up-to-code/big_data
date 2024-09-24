@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState, useEffect } from "react";
 import { useLocationStore } from "@/lib/store/Location";
 
 // Famous Saudi cities
@@ -29,14 +29,15 @@ function Location() {
       city.toLowerCase().includes(searchValue.toLowerCase())
     );
     setFilteredCities(filtered); // Update filtered cities
-    console.log(filtered); // Added console.log to test
   };
 
-  console.log("Select component rendered"); // Added console.log to test
+  useEffect(() => {
+    console.log("Select component rendered"); // Added console.log to test
+  }, []);
 
   return (
-    <div className="flex gap-4 max-w-md mx-auto justify-center items-center mb-4 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100">
-      {/* Dropdown list */}
+    <>
+       {/* Dropdown list */}
       <select
         className="w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-100 text-sm rounded-lg shadow-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all duration-300 p-3 hover:bg-gray-200 dark:hover:bg-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
         onChange={(e) => setSearchTerm(e.target.value.trim())}
@@ -56,10 +57,18 @@ function Location() {
         type="text"
         value={searchTerm}
         onChange={handleSearch}
-        placeholder="Search for a city..."
+        placeholder="بحث بالمدينة"
         className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all duration-300 text-gray-700 dark:text-gray-100"
       />
-    </div>
+      
+         
+      
+  
+   
+
+
+      </>
+
   );
 }
 

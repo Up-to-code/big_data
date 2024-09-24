@@ -4,14 +4,16 @@ import React, { useEffect, useState, useRef } from "react";
 import propertyfinder from "@/data/propertyfinder/homes.json";
 import bayut from "@/data/bayut/homes.json";
 import wasalt from "@/data/wasalt/homes.json";
-
+ 
 import SearchInput from "./SearchInput"; // Import the new SearchInput component
 import useSearchStore from "@/lib/store/useSearchStore"; // Import Zustand store
 import Item from "./Item";
 import Location from "./Location";
 import { useLocationStore } from "@/lib/store/Location"; // Import LocationStore
 import useBrandsStore from "@/lib/store/BrandsStore";
-
+import useRoomsStore from "@/lib/store/RomsStore"; // Import RomsStore
+import Rooms from "./Rooms";
+ 
 // Define the type for a single property item
 interface Property {
   price: string;
@@ -32,6 +34,7 @@ const Show: React.FC = () => {
   const { brands } = useBrandsStore();
   const { searchTerm } = useSearchStore(); // Use Zustand to get searchTerm
   const { searchTerm: locationTerm } = useLocationStore(); // Use LocationStore to get locationTerm
+  const { rooms } = useRoomsStore(); // Use RomsStore to get rooms
 
   useEffect(() => {
     try {
@@ -58,14 +61,16 @@ const Show: React.FC = () => {
     const search = searchTerm.toLowerCase();
     const titleWords = item.title.toLowerCase().split(" ");
     const locationWords = item.Location.toLowerCase().split(" ");
+    const roomsWords = item.rooms.toLowerCase().split(" "); 
     return (
       titleWords.some((word) => word.includes(search)) ||
-      locationWords.some((word) => word.includes(search))
+      locationWords.some((word) => word.includes(search)) ||
+      roomsWords.some((word) => word.includes(search))
     );
   };
 
   const filteredItems =
-    searchTerm === "" && locationTerm === ""
+    searchTerm === "" && locationTerm === "" && rooms === ""
       ? items.slice(0, visibleCount)
       : items
           .filter((item) => {
@@ -73,9 +78,13 @@ const Show: React.FC = () => {
             const isLocationMatch = item.Location.toLowerCase().includes(
               locationTerm.toLowerCase()
             );
+            const isRoomsMatch = item.rooms.toLowerCase().includes(
+              rooms.toLowerCase()
+            );
             return (
               (searchTerm === "" || isSearchMatch) &&
-              (locationTerm === "" || isLocationMatch)
+              (locationTerm === "" || isLocationMatch) &&
+              (rooms === "" || isRoomsMatch)
             );
           })
           .slice(0, visibleCount);
@@ -99,14 +108,16 @@ const Show: React.FC = () => {
         observer.unobserve(currentLoaderRef);
       }
     };
-  }, [visibleCount, searchTerm, locationTerm]);
+  }, [visibleCount, searchTerm, locationTerm, rooms]);
 
   return (
     <div className="flex flex-col items-center w-full h-full px-4">
-      {/* Use the SearchInput component */}
-      <SearchInput />
+       <SearchInput />  {/* Use the SearchInput component */}
       {/* Use the Location component */}
-      <Location />
+      <div className="flex gap-5 items-center w-full px-4">
+        <Location />
+        <Rooms />
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
         {filteredItems.length > 0 ? (
           filteredItems.map((item, index) => <Item key={index} item={item} />)
