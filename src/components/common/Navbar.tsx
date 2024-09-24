@@ -26,8 +26,8 @@ export default function Navbar() {
       <div className="container flex h-16 items-center justify-between px-4">
         <div className="flex items-center">
           <Link href="/" className="text-lg font-bold">
-<Image src={logo} alt="logo" width={50} height={40} />
-</Link>
+          logo
+ </Link>
         </div>
         <div className="hidden md:flex space-x-8">
         

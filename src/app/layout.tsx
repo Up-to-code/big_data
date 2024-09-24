@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/common/Navbar";
-import QueryClientProviderWrapper from "@/provider/Provider";
-
+ 
 // Importing custom local fonts
 
 // Setting metadata for the page
@@ -26,8 +25,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body>
-        <QueryClientProviderWrapper>
-        {/* ThemeProvider to manage light/dark mode, using system preferences */}
+         {/* ThemeProvider to manage light/dark mode, using system preferences */}
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -41,7 +39,7 @@ export default function RootLayout({
             {/* Main content */}
             {children}
           </div>
-        </ThemeProvider></QueryClientProviderWrapper>
+        </ThemeProvider> 
       </body>
     </html>
   );
