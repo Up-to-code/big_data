@@ -10,8 +10,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { Menu } from "lucide-react"
- import logo from "@/assets/logo.png";
-import Image from 'next/image'
+ 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
