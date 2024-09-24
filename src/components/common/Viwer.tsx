@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import propertyfinder from "@/data/propertyfinder/homes.json";
 import bayut from "@/data/bayut/homes.json";
 import wasalt from "@/data/wasalt/homes.json";
+import haraj from "@/data/haraj/homes.json";
  
 import SearchInput from "./SearchInput"; // Import the new SearchInput component
 import useSearchStore from "@/lib/store/useSearchStore"; // Import Zustand store
@@ -46,6 +47,8 @@ const Show: React.FC = () => {
         setItems(bayut as Property[]);
       } else if (brands[0].type === "wasalt") {
         setItems(wasalt as Property[]);
+      } else if (brands[0].type === "haraj") {
+        setItems(haraj as unknown as Property[]);
       }
     } catch (e) {
       setError("Failed to load data");
@@ -59,14 +62,21 @@ const Show: React.FC = () => {
 
   const searchInFunc = (item: Property) => {
     const search = searchTerm.toLowerCase();
-    const titleWords = item.title.toLowerCase().split(" ");
-    const locationWords = item.Location.toLowerCase().split(" ");
-    const roomsWords = item.rooms.toLowerCase().split(" "); 
-    return (
-      titleWords.some((word) => word.includes(search)) ||
-      locationWords.some((word) => word.includes(search)) ||
-      roomsWords.some((word) => word.includes(search))
-    );
+    const titleWords = item.title ? item.title.toLowerCase().split(" ") : [];
+    const locationWords = item.Location ? item.Location.toLowerCase().split(" ") : [];
+    const roomsWords = item.rooms ? item.rooms.toLowerCase().split(" ") : []; 
+    if (roomsWords.join(" ") !== "injosn") {
+      return (
+        titleWords.some((word) => word.includes(search)) ||
+        locationWords.some((word) => word.includes(search)) ||
+        roomsWords.some((word) => word.includes(search))
+      );
+    } else {
+      return (
+        titleWords.some((word) => word.includes(search)) ||
+        locationWords.some((word) => word.includes(search))
+      );
+    }
   };
 
   const filteredItems =
@@ -75,12 +85,12 @@ const Show: React.FC = () => {
       : items
           .filter((item) => {
             const isSearchMatch = searchInFunc(item);
-            const isLocationMatch = item.Location.toLowerCase().includes(
+            const isLocationMatch = item.Location ? item.Location.toLowerCase().includes(
               locationTerm.toLowerCase()
-            );
-            const isRoomsMatch = item.rooms.toLowerCase().includes(
+            ) : false;
+            const isRoomsMatch = item.rooms ? item.rooms.toLowerCase().includes(
               rooms.toLowerCase()
-            );
+            ) : false;
             return (
               (searchTerm === "" || isSearchMatch) &&
               (locationTerm === "" || isLocationMatch) &&
