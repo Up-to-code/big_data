@@ -6,7 +6,7 @@ import Bayut from "@/assets/Bayut-KSA.png";
 import wasalt from "@/assets/wasalt-logo-ar.svg";
 import useBrandsStore from "@/lib/store/BrandsStore";
 import haraj from "@/assets/haraj-logo.png";
-
+import muktamel from "@/assets/logo.webp";
 function Brands() {
   const { brands, setBrands } = useBrandsStore();
 
@@ -35,6 +35,12 @@ function Brands() {
         onClick={() => setBrands([{ type: "haraj" }])}
       >
         <Image src={haraj} alt="Haraj" width={100} height={50} />
+      </div>
+      <div
+        className={`min-w-[150px] bg-slate-100 dark:bg-slate-800 flex flex-col justify-center items-center px-6 py-2 rounded-md shadow-md transition-transform duration-300 ease-in-out hover:scale-105 border-4 border-double ${brands[0]?.type === "muktamel" ? "border-blue-500" : "border-gray-300"}`}
+        onClick={() => setBrands([{ type: "muktamel" }])}
+      >
+        <Image src={muktamel} alt="Muktamel" width={100} height={50} />
       </div>
     </div>
   );

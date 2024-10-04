@@ -5,6 +5,7 @@ import propertyfinder from "@/data/propertyfinder/homes.json";
 import bayut from "@/data/bayut/homes.json";
 import wasalt from "@/data/wasalt/homes.json";
 import haraj from "@/data/haraj/homes.json";
+import muktamel from "@/data/muktamel/homes.json";
  
 import SearchInput from "./SearchInput"; // Import the new SearchInput component
 import useSearchStore from "@/lib/store/useSearchStore"; // Import Zustand store
@@ -49,6 +50,8 @@ const Show: React.FC = () => {
         setItems(wasalt as Property[]);
       } else if (brands[0].type === "haraj") {
         setItems(haraj as unknown as Property[]);
+      } else if (brands[0].type === "muktamel") {
+        setItems(muktamel as unknown as Property[]);
       }
     } catch (e) {
       setError("Failed to load data");

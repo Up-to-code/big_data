@@ -1,6 +1,6 @@
 import { create } from "zustand";
 interface Brand {
-   type: "bayut" | "propertyfinder" | "wasalt" | "haraj";
+   type: "bayut" | "propertyfinder" | "wasalt" | "haraj" | "muktamel";
 }
 
  const useBrandsStore = create<{ brands: Brand[]; setBrands: (brands: Brand[]) => void }>((set) => ({
