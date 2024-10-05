@@ -54,6 +54,7 @@ function Create() {
         contactName: "",
         contactPhone: "",
       });
+      window.location.reload(); // Reload the page after successful save
     } catch (error) {
       setError("An error occurred while saving the property. Please try again.");
       setLoading(false); // Set loading to false in case of error
